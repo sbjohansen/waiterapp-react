@@ -1,0 +1,39 @@
+{
+  "tables": [
+    {
+      "id": 1,
+      "state": "busy",
+      "people": "2",
+      "maxPeople": "6",
+      "bill": "0"
+    },
+    {
+      "id": 2,
+      "state": "busy",
+      "people": "2",
+      "maxPeople": "6",
+      "bill": "0"
+    },
+    {
+      "id": 3,
+      "state": "busy",
+      "people": "2",
+      "maxPeople": "6",
+      "bill": "0"
+    },
+    {
+      "id": 4,
+      "state": "busy",
+      "people": "2",
+      "maxPeople": "6",
+      "bill": "0"
+    },
+    {
+      "id": 5,
+      "state": "busy",
+      "people": "2",
+      "maxPeople": "6",
+      "bill": "0"
+    }
+  ]
+}
