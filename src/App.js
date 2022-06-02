@@ -1,17 +1,29 @@
 import Header from "./components/views/Header/Header";
-import {useDispatch} from "react-redux";
-import {useEffect} from "react";
-import {fetchTables} from "./redux/tablesReducer";
+import Home from "./components/pages/Home";
+import Table from "./components/features/Table/Table";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { fetchTables } from "./redux/tablesReducer";
+import { fetchStatus } from "./redux/statusReducer";
 
+import { Container } from "react-bootstrap";
+import { Route, Routes } from "react-router";
 function App() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    useEffect(() => dispatch(fetchTables()), [dispatch]);
+  useEffect(() => dispatch(fetchTables()), [dispatch]);
+  useEffect(() => dispatch(fetchStatus()), [dispatch]);
 
   return (
-    <div>
-      <Header />
-    </div>
+    <main>
+      <Container>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/table/:tableId" element={<Table />} />
+        </Routes>
+      </Container>
+    </main>
   );
 }
 
