@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTableById } from "../../../redux/tablesReducer";
 import TableForm from "./TableForm";
 import { editTable } from "../../../redux/tablesReducer";
+
 const EditTable = () => {
   const dispatch = useDispatch();
   const { tableId } = useParams();
@@ -11,7 +12,6 @@ const EditTable = () => {
 
   const navigate = useNavigate();
 
-  console.log(tableId);
   const handleSubmit = (table) => {
     dispatch(editTable({ ...table, tableId }));
     navigate("/");
@@ -20,7 +20,7 @@ const EditTable = () => {
   return (
     <TableForm
       action={handleSubmit}
-      actionText="Edit table"
+      actionText="Change"
       id={tableData.id}
       people={tableData.people}
       maxPeople={tableData.maxPeople}

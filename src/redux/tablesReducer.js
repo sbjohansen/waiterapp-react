@@ -22,14 +22,27 @@ export const fetchTables = () => {
   };
 };
 
+export const updateTableRequest = (updatedTable) => {
+  return (dispatch) => {
+    const options = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updatedTable),
+    };
+
+    fetch('http://localhost:3131/api/tables/' + updatedTable.id, options)
+    .then(() => dispatch(editTable(updatedTable)))
+  }
+}
+
 const tablesReducer = (statePart = [], action) => {
   switch (action.type) {
     case UPDATE_TABLES:
       return [...action.payload];
     case EDIT_TABLE:
-      return statePart.map((table) =>
-        table.id === action.payload.id ? { ...table, ...action.payload } : table
-      );
+      return  statePart.map((table) => (table.id === action.payload.id ? { ...table, ...action.payload } : table));
     default:
       return statePart;
   }

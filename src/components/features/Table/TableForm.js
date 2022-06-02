@@ -1,13 +1,15 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Form } from "react-bootstrap";
 import { Row, Col, Button } from "react-bootstrap";
 import { useParams } from "react-router";
 import { getTableById } from "../../../redux/tablesReducer";
 import { getStatus } from "../../../redux/statusReducer";
 import { useState } from "react";
+import { updateTableRequest } from "../../../redux/tablesReducer";
 
 const TableForm = ({ action, actionText, ...props }) => {
   const { tableId } = useParams();
+  const dispatch = useDispatch();
 
   const tableData = useSelector((state) => getTableById(state, tableId));
   const id = tableData.id;
@@ -19,8 +21,9 @@ const TableForm = ({ action, actionText, ...props }) => {
   const [maxPeople, setMaxPeople] = useState(props.maxPeople || "");
   const [bill, setBill] = useState(props.bill || "");
 
-  const handleSubmit = () => {
-    action({ people, status, maxPeople, bill, id });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(updateTableRequest({ id, people, maxPeople, bill, status }));
   };
 
   return (
@@ -89,8 +92,7 @@ const TableForm = ({ action, actionText, ...props }) => {
                 </Col>
               </Row>
             </Form.Group>
-
-            <Button as="input" type="submit" style={{ marginTop: "10px" }} />
+            <Button as="input" value={actionText} type="submit" style={{ marginTop: "10px" }} />
           </Form>
         </Col>
       </Row>
