@@ -1,23 +1,24 @@
-import { Container, Row, Col, Stack } from "react-bootstrap";
-import  Tables  from "../../components/features/Tables/Tables";
+import TableInfo from "../features/Table/TableInfo";
+import { getAllTables } from "../../redux/tablesReducer";
+import { useSelector } from "react-redux";
 
 function Home() {
+  const tablesData = useSelector(getAllTables);
+
   return (
     <div>
-      <Container>
-        <Stack gap={3}>
-          <Row>
-            <Col className="d-flex justify-content-start">
-              <h1>All Tables</h1>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Tables />
-            </Col>
-          </Row>
-        </Stack>
-      </Container>
+      <h1 className="my-5">All tables</h1>
+      {tablesData.map((table, index) => (
+        <TableInfo
+          key={index}
+          id={table.id}
+          number={table.id}
+          status={table.status}
+          people={table.people}
+          maxPeople={table.maxPeople}
+          bill={table.bill}
+        />
+      ))}
     </div>
   );
 }

@@ -1,30 +1,28 @@
 import { useSelector } from "react-redux";
-import { getAllTables } from "../../../redux/tablesReducer";
-import { Card, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { Row, Col, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { useParams } from "react-router";
 import { getTableById } from "../../../redux/tablesReducer";
 import { getStatus } from "../../../redux/statusReducer";
 import { useState } from "react";
 
-const Table = () => {
+const TableForm = ({ action, actionText, ...props }) => {
   const { tableId } = useParams();
-
 
   const tableData = useSelector((state) => getTableById(state, tableId));
   const id = tableData.id;
 
   const statusData = useSelector(getStatus);
 
-  const [people, setPeople] = useState(tableData.people || "");
-  const [status, setStatus] = useState(tableData.state || "");
-  const [maxPeople, setMaxPeople] = useState(tableData.maxPeople || "");
-  const [bill, setBill] = useState(tableData.bill || "");
+  const [people, setPeople] = useState(props.people || "");
+  const [status, setStatus] = useState(props.status || "");
+  const [maxPeople, setMaxPeople] = useState(props.maxPeople || "");
+  const [bill, setBill] = useState(props.bill || "");
 
-  const handleSubmit = (post) => {};
+  const handleSubmit = () => {
+    action({ people, status, maxPeople, bill, id });
+  };
 
-  console.log(tableData);
   return (
     <div>
       <h1>Table {id} </h1>
@@ -77,7 +75,9 @@ const Table = () => {
               </Row>
               <Row>
                 <Col sm="1">
-                  <Form.Label><b>Bill:</b></Form.Label>
+                  <Form.Label>
+                    <b>Bill:</b>
+                  </Form.Label>
                 </Col>
                 <Col sm="2">
                   <Form.Control
@@ -90,7 +90,7 @@ const Table = () => {
               </Row>
             </Form.Group>
 
-            <Button as="input" type="submit" value={bill} style={{ marginTop: "10px" }} />
+            <Button as="input" type="submit" style={{ marginTop: "10px" }} />
           </Form>
         </Col>
       </Row>
@@ -98,4 +98,4 @@ const Table = () => {
   );
 };
 
-export default Table;
+export default TableForm;
