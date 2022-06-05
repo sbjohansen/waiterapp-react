@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import { getTableById, updateTableRequest } from '../../../redux/tablesReducer';
 import { getStatus } from '../../../redux/statusReducer';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 function TableForm({ actionText, ...props }) {
   const { tableId } = useParams();
@@ -21,6 +21,7 @@ function TableForm({ actionText, ...props }) {
   const [maxPeople, setMaxPeople] = useState(props.maxPeople || '');
   const [bill, setBill] = useState(props.bill || '');
   const [statusError, setStatusError] = useState(false);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -32,6 +33,7 @@ function TableForm({ actionText, ...props }) {
     setStatusError(!status);
     if (maxPeople) {
       dispatch(updateTableRequest({ id, people, maxPeople, bill, status }));
+      navigate('/');
     }
   };
 
