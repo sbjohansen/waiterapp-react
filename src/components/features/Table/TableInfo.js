@@ -1,8 +1,9 @@
-import { Col, Row, Button } from 'react-bootstrap'
+import { Col, Row, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-
-const TableInfo = ({status, id}) => {
+const TableInfo = ({ status, id, bill }) => {
+  const tableStatus = status;
   return (
     <Row>
       <Row className="align-items-end mb-3">
@@ -10,17 +11,32 @@ const TableInfo = ({status, id}) => {
           <h2 className="mb-0">Table {id}</h2>
         </Col>
         <Col className="col-4">
-          <p className="mb-0 pl-3"><strong>Status:</strong> {status}</p>
+          <strong>Status:</strong> {status} {''}
+          {tableStatus === 'Busy' && (
+            <span>
+              {''}
+              <strong>Bill: </strong>
+              {bill}
+            </span>
+          )}
         </Col>
         <Col className="col-6 d-flex justify-content-end">
-          <Link to={"/table/" + id}>
-            <Button variant="primary"  size="sm">Show more</Button>
+          <Link to={'/table/' + id}>
+            <Button variant="primary" size="sm">
+              Show more
+            </Button>
           </Link>
         </Col>
       </Row>
       <hr />
     </Row>
-  )
+  );
+};
+
+TableInfo.propTypes = {
+  id: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+  bill: PropTypes.string.isRequired
 };
 
 export default TableInfo;

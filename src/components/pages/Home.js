@@ -1,13 +1,13 @@
-import TableInfo from "../features/Table/TableInfo";
-import { getAllTables } from "../../redux/tablesReducer";
-import { useSelector } from "react-redux";
+import TableInfo from '../features/Table/TableInfo';
+import { getAllTables } from '../../redux/tablesReducer';
+import { useSelector } from 'react-redux';
 
 function Home() {
   const tablesData = useSelector(getAllTables);
 
   return (
     <div>
-      <h1 className="my-5">All tables</h1>
+      <h1 className="mb-5">All tables</h1>
       {tablesData.map((table, index) => (
         <TableInfo
           key={index}

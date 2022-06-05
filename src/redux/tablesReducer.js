@@ -1,3 +1,5 @@
+import { API_URL } from '../config.js';
+
 //selectors
 export const getTableById = ({ tables }, tableId) => tables.find((table) => table.id === tableId);
 export const getAllTables = ({ tables }) => tables;
@@ -11,12 +13,12 @@ export const updateTables = (payload) => ({ type: UPDATE_TABLES, payload });
 export const editTable = (payload) => ({ type: EDIT_TABLE, payload });
 
 // action creators
-const UPDATE_TABLES = createActionName("UPDATE_TABLES");
-const EDIT_TABLE = createActionName("EDIT_TABLE");
+const UPDATE_TABLES = createActionName('UPDATE_TABLES');
+const EDIT_TABLE = createActionName('EDIT_TABLE');
 
 export const fetchTables = () => {
   return (dispatch) => {
-    fetch("http://localhost:3131/api/tables")
+    fetch(API_URL + '/tables')
       .then((res) => res.json())
       .then((tables) => dispatch(updateTables(tables)));
   };
@@ -29,20 +31,23 @@ export const updateTableRequest = (updatedTable) => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(updatedTable),
+      body: JSON.stringify(updatedTable)
     };
 
-    fetch('http://localhost:3131/api/tables/' + updatedTable.id, options)
-    .then(() => dispatch(editTable(updatedTable)))
-  }
-}
+    fetch(API_URL + '/tables/' + updatedTable.id, options).then(() =>
+      dispatch(editTable(updatedTable))
+    );
+  };
+};
 
 const tablesReducer = (statePart = [], action) => {
   switch (action.type) {
     case UPDATE_TABLES:
       return [...action.payload];
     case EDIT_TABLE:
-      return  statePart.map((table) => (table.id === action.payload.id ? { ...table, ...action.payload } : table));
+      return statePart.map((table) =>
+        table.id === action.payload.id ? { ...table, ...action.payload } : table
+      );
     default:
       return statePart;
   }
