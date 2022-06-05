@@ -37,10 +37,11 @@ function TableForm({ actionText, ...props }) {
     }
   };
 
-  if (maxPeople > 10) setMaxPeople(10);
-  if (maxPeople < 0) setMaxPeople(0);
-  if (people > maxPeople) setPeople(maxPeople);
-  if (bill < 0) setBill(0);
+  if (parseInt(maxPeople) > 10) setMaxPeople('10');
+  if (parseInt(maxPeople) < 0) setMaxPeople('0');
+  if (parseInt(people) > maxPeople) setPeople(maxPeople);
+  if (parseInt(people) < 0) setPeople('0');
+  if (parseInt(bill) < 0) setBill('0');
 
   if (!tableData) return <Navigate to="/" />;
 
