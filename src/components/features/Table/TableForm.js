@@ -89,7 +89,9 @@ function TableForm({ actionText, ...props }) {
                   onChange={(e) => setStatus(e.target.value)}
                   value={status}
                   aria-label="Select category">
-                  <option>Select category</option>
+                  <option disabled value="1">
+                    Select category
+                  </option>
                   {statusData.map((category, index) => (
                     <option key={index} value={category}>
                       {category}
