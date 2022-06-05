@@ -37,11 +37,10 @@ function TableForm({ actionText, ...props }) {
     }
   };
 
-  if (maxPeople > 10) setMaxPeople('10');
-  if (maxPeople < 0) setMaxPeople('0');
+  if (maxPeople > 10) setMaxPeople(10);
+  if (maxPeople < 0) setMaxPeople(0);
   if (people > maxPeople) setPeople(maxPeople);
-  if (people < 0) setPeople('0');
-  if (bill < 0) setBill('0');
+  if (bill < 0) setBill(0);
 
   if (!tableData) return <Navigate to="/" />;
 
@@ -60,8 +59,8 @@ function TableForm({ actionText, ...props }) {
                 className="pl-3"
                 style={{ width: '50px', marginLeft: '10px', marginRight: '10px' }}
                 type="number"
-                onChange={(e) => setPeople(e.target.value)}
                 value={status === 'Busy' ? people : 0}
+                onChange={(e) => setPeople(e.target.value)}
               />
               /
               <Form.Control
