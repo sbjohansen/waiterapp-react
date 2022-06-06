@@ -1,4 +1,3 @@
-/*eslint-disable */
 /* global require, process */
 const jsonServer = require('json-server');
 const server = jsonServer.create();
