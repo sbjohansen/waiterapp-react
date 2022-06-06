@@ -30,7 +30,7 @@ function TableForm({ actionText, ...props }) {
   } = useForm();
 
   const handleSubmit = () => {
-    setStatusError(!status);
+    setStatusError(!statusError);
     if (maxPeople) {
       dispatch(updateTableRequest({ id, people, maxPeople, bill, status }));
       navigate('/');
@@ -115,8 +115,8 @@ function TableForm({ actionText, ...props }) {
                     {...register('bill', { required: true })}
                     type="number"
                     placeholder="current bill"
-                    onChange={(e) => setBill(e.target.value)}
                     value={status === 'Busy' ? bill : 0}
+                    onChange={(e) => setBill(e.target.value)}
                   />
                 </Col>
                 {errors.bill && (
