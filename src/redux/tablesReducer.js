@@ -18,7 +18,7 @@ const EDIT_TABLE = createActionName('EDIT_TABLE');
 
 export const fetchTables = () => {
   return (dispatch) => {
-    fetch(API_URL + '/tables')
+    fetch({ API_URL } + '/tables')
       .then((res) => res.json())
       .then((tables) => dispatch(updateTables(tables)));
   };
@@ -34,7 +34,7 @@ export const updateTableRequest = (updatedTable) => {
       body: JSON.stringify(updatedTable)
     };
 
-    fetch(API_URL + '/tables/' + updatedTable.id, options).then(() =>
+    fetch({ API_URL } + '/tables/' + updatedTable.id, options).then(() =>
       dispatch(editTable(updatedTable))
     );
   };
